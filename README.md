@@ -28,7 +28,8 @@ The project demonstrates real-world automation concepts such as dynamic element 
 - Checkout and place order
 - Validate order confirmation message
 
----🗂 Project Structure
+---
+🗂 Project Structure
 
 ```text
 OrderAutomation
@@ -56,3 +57,32 @@ OrderAutomation
 │
 ├── pom.xml
 └── README.md
+---
+
+▶️ How to Run Tests
+
+Option 1: Using Maven
+```bash
+mvn test
+
+Option 2: Using Eclipse
+	•	Right click on SubmitOrderTest.java
+	•	Run as → TestNG Test
+---
+🧠 Key Automation Concepts Implemented
+	•	Page Object Model (POM)
+	•	Explicit waits for dynamic Angular elements
+	•	TestNG lifecycle management
+	•	Clean separation of test logic and page logic
+	•	Reusable and maintainable page objects
+---
+📈 Future Enhancements
+	•	DataProvider for multiple test data
+	•	Extent Reports integration
+	•	Retry logic for failed tests
+	•	Cucumber (BDD) integration
+
+👤 Author
+Munisekhar
+SDET | QA Automation Engineer
+GitHub: https://github.com/muni-qa-engineer
