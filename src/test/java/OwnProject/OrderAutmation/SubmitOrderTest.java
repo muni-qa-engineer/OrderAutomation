@@ -1,6 +1,8 @@
 package OwnProject.OrderAutmation;
 
 import java.io.IOException;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import OwnProject.pageObjects.CartPage;
@@ -9,13 +11,17 @@ import OwnProject.pageObjects.LoginPage;
 import OwnProject.pageObjects.ConfirmationPage;
 import OwnProject.pageObjects.ProductCataloguePage;
 import baseTestComponent.BaseTest;
+import utils.TestDataProvider;
 
 public class SubmitOrderTest extends BaseTest {
-	String requiredProductName = "ADIDAS ORIGINAL" ; 
-	String countryName = "india" ;
-	String orderConfirmationExpected = "Thankyou for the order." ;
-	@Test
-    public void submitOrderTest() throws InterruptedException, IOException {
+	
+	@Test(dataProvider = "orderData", dataProviderClass = TestDataProvider.class)
+    public void submitOrderTest(
+    		String email,
+            String password,
+            String requiredProductName,
+            String countryName) 
+            		throws InterruptedException, IOException {
 		
 //      Login to the page with credentials
         LoginPage loginPage = new LoginPage(driver);
@@ -35,8 +41,14 @@ public class SubmitOrderTest extends BaseTest {
 //		Place order
 		confirm.getConfirmationMessage();
 		
+//		 Assert confirmation
+        Assert.assertTrue(
+        		confirm.getConfirmationMessage()
+                        .equalsIgnoreCase("THANKYOU FOR THE ORDER.")
+        );
+
 //		Close all the tabs and quit 
-		closeBrowser();
+		
 	}
 
 }

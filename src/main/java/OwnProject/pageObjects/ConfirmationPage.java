@@ -28,10 +28,10 @@ public class ConfirmationPage {
     @FindBy(css=".hero-primary")
     WebElement orderConfirmationByImg;
 
-    public void getConfirmationMessage() throws IOException {
+    public String getConfirmationMessage() throws IOException {
     	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".hero-primary")));
-//		 WebElement orderConfirmationByImg = driver.findElement(By.cssSelector(".hero-primary"));
 		 File src1 = orderConfirmationByImg.getScreenshotAs(OutputType.FILE);
 		 FileUtils.copyFile(src1, new File(System.getProperty("user.dir")+"/screenshots/OrderConfirmation.png"));
+		 return orderConfirmationByImg.getText();
     }
 }

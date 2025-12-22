@@ -2,9 +2,7 @@ package OwnProject.pageObjects;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -12,15 +10,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CartPage {
-    WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)) ;
-    public CartPage(WebDriver driver) {
-        this.driver = driver;
+import AbstractComponent.ReusableUtilities;
+
+public class CartPage extends ReusableUtilities{
+
+	public CartPage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
+    
     // Locators
     @FindBy(css=".img-fluid")
     WebElement image ;

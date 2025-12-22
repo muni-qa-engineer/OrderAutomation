@@ -14,8 +14,8 @@ public class LoginPage{
 		this.driver = driver ;
 		PageFactory.initElements(driver, this);
 	}
-	String userMail = "muni@gmail.com";
-	String userPassword = "Muni@123";
+//	String userMail = "muni@gmail.com";
+//	String userPassword = "Muni@123";
 	
 //	Login to the page with credentials
 	

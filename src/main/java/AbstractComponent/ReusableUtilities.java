@@ -24,9 +24,14 @@ public class ReusableUtilities {
     public void waitForElementToAppear(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
+    
+    // Wait for element to be visibleby
+    public void waitForElementByToAppear(By locator) {
+    	wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+    
     // Wait for element to be clickable
-    public void waitForElementToBeClickable(By locator) {
+    public void waitForElementToBeClickable(WebElement locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -36,8 +41,8 @@ public class ReusableUtilities {
     }
 
     // Screenshot utility
-    public String takeScreenshot(String fileName) throws IOException {
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    public String takeElementScreenshot(WebElement element, String fileName) throws IOException {
+        File src = element.getScreenshotAs(OutputType.FILE);
         String path = System.getProperty("user.dir") + "/screenshots/" + fileName + ".png";
         FileUtils.copyFile(src, new File(path));
         return path;

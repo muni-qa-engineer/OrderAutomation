@@ -1,6 +1,5 @@
 package OwnProject.pageObjects;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -8,16 +7,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import AbstractComponent.ReusableUtilities;
 
-public class CheckoutPage {
+public class CheckoutPage extends ReusableUtilities{
 
-    WebDriver driver;
-    WebDriverWait wait;
     public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        super (driver);
         PageFactory.initElements(driver, this);
     }
     
@@ -28,9 +23,11 @@ public class CheckoutPage {
     WebElement placeOrderBtn;
 
     public CheckoutPage selectCountry(String countryName) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(countryInput));
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(countryInput));
+    	waitForElementByToAppear(countryInput);
         driver.findElement(countryInput).sendKeys(countryName);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(countrySuggestions));
+        waitForElementByToAppear(countrySuggestions);
+//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(countrySuggestions));
         List<WebElement> countries = driver.findElements(countrySuggestions);
         WebElement selectedCountry = countries.stream().filter(c -> c.getText().equalsIgnoreCase(countryName))
                 .findFirst().orElse(null);
@@ -43,7 +40,9 @@ public class CheckoutPage {
     }
 
     public ConfirmationPage placeOrder() {
-        wait.until(ExpectedConditions.elementToBeClickable(placeOrderBtn));
+    	
+//        wait.until(ExpectedConditions.elementToBeClickable(placeOrderBtn));
+    	waitForElementToBeClickable(placeOrderBtn);
         placeOrderBtn.click();
         
         return new ConfirmationPage(driver);
