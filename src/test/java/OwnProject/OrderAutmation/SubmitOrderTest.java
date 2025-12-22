@@ -16,26 +16,25 @@ public class SubmitOrderTest extends BaseTest {
 	String orderConfirmationExpected = "Thankyou for the order." ;
 	@Test
     public void submitOrderTest() throws InterruptedException, IOException {
-		openBrowser();
-        driver.get("https://rahulshettyacademy.com/client/#/auth/login");
+		
 //      Login to the page with credentials
         LoginPage loginPage = new LoginPage(driver);
-		loginPage.login("muni@gmail.com", "Muni@123");
+        
 //		Find the required productName
-		ProductCataloguePage productCatalogePage = new ProductCataloguePage(driver);
-		productCatalogePage.isProductDisplayed(requiredProductName);
-		productCatalogePage.getRequiredProductName(requiredProductName);
-		Thread.sleep(3000); //We used this there is an Animation unable to find the webElement, so we gave break for 3sec.
+		ProductCataloguePage productCatalogePage = loginPage.login("muni@gmail.com", "Muni@123");
 //		Add to Cart
-		CartPage cart = new CartPage(driver);
-		cart.addProductToCart(requiredProductName);
-		cart.buyNow(requiredProductName);
+		CartPage cart = productCatalogePage.getRequiredProductName(requiredProductName);
+		
 //		CheckOut
-		CheckoutPage checkOutCart = new CheckoutPage(driver) ;
-		checkOutCart.selectCountry(countryName);
+		CheckoutPage checkOutCart = cart.addProductToCart(requiredProductName);
+		
 //		 OrderConfirmation
-		ConfirmationPage confirm = new ConfirmationPage(driver);
+		ConfirmationPage confirm = checkOutCart.selectCountry(countryName)
+				.placeOrder();
+		
+//		Place order
 		confirm.getConfirmationMessage();
+		
 //		Close all the tabs and quit 
 		closeBrowser();
 	}

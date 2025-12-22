@@ -1,47 +1,59 @@
 package OwnProject.pageObjects;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage {
     WebDriver driver;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)) ;
     public CartPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
     // Locators
-    By productCards = By.cssSelector(".card-body");
-    By productName = By.cssSelector("h5");
-    By addToCartBtn = By.cssSelector("button");
-    By cartBtn = By.xpath("//button[@routerlink='/dashboard/cart']");
-    By cartProducts = By.cssSelector(".items h3");
+    @FindBy(css=".img-fluid")
+    WebElement image ;
+    
+    @FindBy(css=".btn-primary")
+    WebElement addCartButton ;
+    
+    @FindBy(xpath="//button[@routerlink='/dashboard/cart']")
+    WebElement CartIcon ;
+    
+    @FindBy(css=".items h3")
+    List<WebElement> productInCart ;
+    
 
-    public void addProductToCart(String requiredProductName) {
-        List<WebElement> products = driver.findElements(productCards);
-        WebElement requiredProduct = products.stream().filter(p -> p.findElement(productName).getText()
-                        .equalsIgnoreCase(requiredProductName)).findFirst().orElse(null);
-        if (requiredProduct == null) {
-            throw new RuntimeException("Product not found: " + requiredProductName);
-        }
-        requiredProduct.findElement(addToCartBtn).click();
-        System.out.println("\n Muni printing the End of addProductToCart");
+    public CheckoutPage addProductToCart(String requiredProductName) throws InterruptedException, IOException {
+    	
+    	Thread.sleep(3000);
+//		Add to cart
+		File src = image.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/screenshots/productImg.png"));
+		addCartButton.click();
+		CartIcon.click();
+		WebElement buyProduct = productInCart.stream()
+		        .filter(c -> c.getText().equalsIgnoreCase(requiredProductName)).findFirst().orElse(null);
+		if (buyProduct != null) {
+		    buyProduct
+		        .findElement(By.xpath("//button[.='Buy Now']")).click();
+		} else {
+		    System.out.println("Product not found in cart");
+		}
+		
+		return new CheckoutPage(driver);
+    	
     }
 
-    public CheckoutPage buyNow(String requiredProductName) {
-        driver.findElement(cartBtn).click();
-        List<WebElement> products = driver.findElements(cartProducts);
-        WebElement product = products.stream().filter(p -> p.getText().equalsIgnoreCase(requiredProductName))
-                .findFirst().orElse(null);
-        System.out.println(product.getText());
-        if (product != null) {
-            product.findElement(By.xpath(".//button[.='Buy Now']")).click();
-            System.out.println("\n Muni printing the End of buynowclick");
-        }
-        System.out.println("\n Muni printing the End of buyNow");
-        return new CheckoutPage(driver);
-    }
 }

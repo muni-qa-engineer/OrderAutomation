@@ -28,9 +28,10 @@ public class LoginPage{
 	@FindBy(id="login")
     WebElement loginBtn;
 	
-	public void login(String userMail, String userPassword) {
+	public ProductCataloguePage login(String userMail, String userPassword) {
         Email.sendKeys(userMail);
         Password.sendKeys(userPassword);
         loginBtn.click();
+        return new ProductCataloguePage(driver);
     }
 }
