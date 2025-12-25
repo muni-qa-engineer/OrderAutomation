@@ -21,8 +21,6 @@ public class CartPage extends ReusableUtilities{
     }
     
     // Locators
-    @FindBy(css=".img-fluid")
-    WebElement image ;
     
     @FindBy(css=".btn-primary")
     WebElement addCartButton ;
@@ -38,6 +36,7 @@ public class CartPage extends ReusableUtilities{
     	
     	Thread.sleep(3000);
 //		Add to cart
+    	WebElement image = driver.findElement(By.xpath("//img[@class='img-fluid']"));
 		File src = image.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/screenshots/productImg.png"));
 		addCartButton.click();
