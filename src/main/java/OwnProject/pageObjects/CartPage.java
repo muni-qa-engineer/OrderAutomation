@@ -35,7 +35,6 @@ public class CartPage extends ReusableUtilities{
     public CheckoutPage addProductToCart(String requiredProductName) throws InterruptedException, IOException {
     	
     	Thread.sleep(3000);
-//		Add to cart
     	WebElement image = driver.findElement(By.xpath("//img[@class='img-fluid']"));
 		File src = image.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/screenshots/productImg.png"));
