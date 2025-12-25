@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import AbstractComponent.ReusableUtilities;
 
@@ -34,7 +35,9 @@ public class CartPage extends ReusableUtilities{
 
     public CheckoutPage addProductToCart(String requiredProductName) throws InterruptedException, IOException {
     	
-    	Thread.sleep(3000);
+    	wait.until(ExpectedConditions.presenceOfElementLocated(
+    	        By.xpath("//img[@class='img-fluid']")
+    	));
     	WebElement image = driver.findElement(By.xpath("//img[@class='img-fluid']"));
 		File src = image.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/screenshots/productImg.png"));
