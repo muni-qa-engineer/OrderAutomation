@@ -1,4 +1,4 @@
-package OwnProject.OrderAutmation;
+package end2End;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class SubmitOrderTest_Duplicate {
 		Thread.sleep(3000); //We used this there is an Animation unable to find the webElement, so we gave break for 3sec.
 		
 //		Add to cart
-		WebElement image = driver.findElement(By.cssSelector(".img-fluid"));
+		WebElement image = driver.findElement(By.xpath("//img[@class='img-fluid']"));
 		File src = image.getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "/screenshots/productImg.png"));
 		driver.findElement(By.cssSelector(".btn-primary")).click();
