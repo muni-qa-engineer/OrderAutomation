@@ -6,7 +6,7 @@ The project demonstrates real-world automation concepts such as dynamic element 
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 - Java
 - Selenium WebDriver
 - TestNG
@@ -16,12 +16,12 @@ The project demonstrates real-world automation concepts such as dynamic element 
 
 ---
 
-## 📌 Application Under Test
+## Application Under Test
 - https://rahulshettyacademy.com/client
 
 ---
 
-## 🧪 Test Scenario Covered
+## Test Scenario Covered
 - Login to the application
 - Verify product availability
 - Add product to cart
@@ -29,38 +29,8 @@ The project demonstrates real-world automation concepts such as dynamic element 
 - Validate order confirmation message
 
 ---
-🗂 Project Structure
 
-```text
-OrderAutomation
-│
-├── src
-│   ├── main
-│   │   └── java
-│   │       ├── baseTestComponent
-│   │       │   └── BaseTest.java
-│   │       ├── AbstractComponent
-│   │       │   └── AbstaractPage.java
-│   │       └── OwnProject
-│   │           └── pageObjects
-│   │               ├── LoginPage.java
-│   │               ├── ProductCataloguePage.java
-│   │               ├── CartPage.java
-│   │               ├── CheckoutPage.java
-│   │               └── ConfirmationPage.java
-│   │
-│   └── test
-│       └── java
-│           └── OwnProject
-│               └── OrderAutmation
-│                   └── SubmitOrderTest.java
-│
-├── pom.xml
-└── README.md
----
-
-▶️ How to Run Tests
-
+## How to Run Tests
 Option 1: Using Maven
 ```bash
 mvn test
@@ -68,19 +38,25 @@ mvn test
 Option 2: Using Eclipse
 	•	Right click on SubmitOrderTest.java
 	•	Run as → TestNG Test
+
 ---
-🧠 Key Automation Concepts Implemented
+
+## Key Automation Concepts Implemented
 	•	Page Object Model (POM)
 	•	Explicit waits for dynamic Angular elements
 	•	TestNG lifecycle management
 	•	Clean separation of test logic and page logic
 	•	Reusable and maintainable page objects
+
 ---
-📈 Future Enhancements
+
+## Future Enhancements
 	•	DataProvider for multiple test data
 	•	Extent Reports integration
 	•	Retry logic for failed tests
 	•	Cucumber (BDD) integration
+
+---
 
 👤 Author
 Munisekhar
